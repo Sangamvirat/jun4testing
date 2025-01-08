@@ -5,25 +5,25 @@ pipeline {
         maven 'Maven3'
     }
     stages{
-        stage ("cleanup workspace"){
-            steps{
+        stage("cleanup workspace"){
+            steps {
                 cleanws()
-            }
+                }
         }
-        stage ("check from scm"){
-            steps{
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sangamvirat/jun4testing.git'
+        stage("check from scm"){
+            steps {
+                    git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sangamvirat/jun4testing.git'
                 
-            }
+                }
         }
-        stage ("build application"){
-            steps{
-                sh"maven clean package"
-            }
+        stage("build application"){
+             steps {
+                     sh"maven clean package"
+                 }
         }
-        stage ("Test application"){
-            step{
-                sh"mvn test"
+        stage("Test application"){
+             step {
+                 sh"mvn test"
                 
             }
         }
