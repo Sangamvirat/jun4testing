@@ -1,0 +1,31 @@
+pipeline {
+    agent { lable 'jenkins-agent'}
+    tools{
+        jdk 'Java17'
+        maven 'Maven3'
+    }
+    stages{
+        stage ("cleanup workspace"){
+            steps{
+                cleanws()
+            }
+        }
+        stage ("check from scm"){
+            steps{
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sangamvirat/jun4testing.git'
+                
+            }
+        }
+        stage ("build application"){
+            steps{
+                sh"maven clean package"
+            }
+        }
+        stage ("Test application"){
+            step{
+                sh"mvn test"
+                
+            }
+        }
+    }
+}
